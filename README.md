@@ -1,34 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# To-Do App
+
+This is a simple to-do application built using Next.js, TypeScript, Tailwind CSS, and MobX State Tree (MST). The application allows users to create, read, update, and delete tasks, and utilizes MST for state management and local storage.
+
+## Technology Stack
+
+- Next.js: A React-based framework for building server-side rendered (SSR) and static web applications.
+- TypeScript: A typed superset of JavaScript that improves code maintainability and provides type safety.
+- Tailwind CSS: A utility-first CSS framework that provides pre-defined styles and classes for common UI elements.
+- MobX State Tree (MST): A state management library based on MobX that provides a structured way to manage application state.
+- Git: A version control system for managing code changes and collaboration.
+
+## User Interface
+
+The user interface of the application allows users to perform the following actions:
+
+- View a list of tasks.
+- Add a new task.
+- Edit an existing task.
+- Delete a task.
+
+The home page of the application displays a list of all the tasks, with each task displayed as a card. Each task card displays the task title, description, and status. Users can click on a task card to view the task details, edit the task, or delete the task.
+
+Users can add a new task by clicking on the "Add Task" button, which opens a modal window where they can enter the task title, description, and status. Users can edit an existing task by clicking on the "Edit" button on the task card, which also opens a modal window with the current task details. Users can delete a task by clicking on the "Delete" button on the task card and confirming the deletion.
+
+## Task Management Functionality
+
+Each task in the application has the following properties:
+
+- Title: A brief title describing the task.
+- Description: A detailed description of the task.
+- Status: The current status of the task (e.g., "To Do," "In Progress," "Completed").
+
+The application provides the necessary functionality to perform CRUD (Create, Read, Update, Delete) operations on tasks. Users can create a new task by filling out the task details in the "Add Task" modal window. Users can view all tasks on the home page, and click on a task card to view or edit the task details. Users can update the task details by editing the task in the "Edit Task" modal window. Users can delete a task by clicking on the "Delete" button on the task card and confirming the deletion.
 
 ## Getting Started
 
-First, run the development server:
+To run the application locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Clone the Git repository.
+2. Install the dependencies using `npm install`.
+3. Start the development server using `npm run dev`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application should now be running on `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Conclusion
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This to-do application provides a simple and intuitive user interface for managing tasks, and utilizes modern web technologies such as Next.js, TypeScript, and Tailwind CSS for a fast and responsive experience. The use of MobX State Tree provides a structured and scalable approach to state management and local storage.
