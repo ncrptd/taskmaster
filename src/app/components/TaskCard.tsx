@@ -1,5 +1,5 @@
 import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
-import { Instance } from 'mobx-state-tree';
+import { Instance, clone } from 'mobx-state-tree';
 import { TaskItem, taskState } from '../model/Task';
 import * as Dialog from '@radix-ui/react-dialog';
 import TaskModal from './TaskModal';
@@ -7,6 +7,10 @@ import { useState } from 'react';
 
 function TaskCard({ task }: { task: Instance<typeof TaskItem> }) {
   const [open, setOpen] = useState(false);
+  const [cloneTask, setClone] = useState<
+    Instance<typeof TaskItem> | undefined
+  >();
+
   return (
     <div
       className={`bg-white p-2 shadow-lg border border-slate-300  overflow-hidden rounded-md cursor-pointer ease-in-out transition-all duration-300 flex justify-between hover:bg-blue-50`}
@@ -39,6 +43,8 @@ function TaskCard({ task }: { task: Instance<typeof TaskItem> }) {
             className="p-2 rounded hover:bg-gray-200"
             onClick={() => {
               setOpen(true);
+              const clonedTask = clone(task);
+              setClone(clonedTask);
             }}
           >
             <Pencil1Icon />
@@ -46,7 +52,7 @@ function TaskCard({ task }: { task: Instance<typeof TaskItem> }) {
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 bg-black/50 flex justify-center items-center">
               <Dialog.Content className=" p-4">
-                <TaskModal setOpen={setOpen} initialValue={task} />
+                <TaskModal setOpen={setOpen} initialValue={cloneTask} />
               </Dialog.Content>
             </Dialog.Overlay>
           </Dialog.Portal>

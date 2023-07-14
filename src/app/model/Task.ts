@@ -1,5 +1,4 @@
 import { Instance, onSnapshot, types, destroy } from 'mobx-state-tree';
-import { title } from 'process';
 import { v4 as uuidv4 } from 'uuid';
 
 const TaskItem = types
@@ -40,6 +39,7 @@ const Tasks = types
     },
     editTask(task: Instance<typeof TaskItem>) {
       const targetTask = self.tasks.find((t) => t.id == task.id);
+      console.log(targetTask);
       if (targetTask) {
         targetTask.addtitle(task.title);
         targetTask.addDescription(task.description);
@@ -48,7 +48,7 @@ const Tasks = types
     },
   }));
 
-const taskState = Tasks.create({
+let initialState = {
   tasks: [
     {
       title: 'Complete math homework',
@@ -81,12 +81,24 @@ const taskState = Tasks.create({
       id: '5',
     },
   ],
-});
+};
+if (localStorage.getItem('tasks')) {
+  console.log('run');
+  const data = JSON.parse(localStorage.getItem('tasks')!);
+
+  initialState = data;
+}
+
+const taskState = Tasks.create(initialState);
 
 const taskItemState = TaskItem.create({
   title: '',
   description: '',
   status: '',
   id: '',
+});
+
+onSnapshot(taskState, (snapshot) => {
+  localStorage.setItem('tasks', JSON.stringify(snapshot));
 });
 export { taskState, taskItemState, TaskItem, Tasks };

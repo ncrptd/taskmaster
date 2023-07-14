@@ -1,8 +1,7 @@
 import { Cross1Icon } from '@radix-ui/react-icons';
 import { TaskItem, taskItemState, taskState } from '../model/Task';
 import { observer } from 'mobx-react-lite';
-import { Instance } from 'mobx-state-tree';
-import { useState } from 'react';
+import { Instance, applySnapshot, getSnapshot } from 'mobx-state-tree';
 
 const TaskModal = observer(
   (props: {
@@ -11,7 +10,6 @@ const TaskModal = observer(
   }) => {
     {
       const task = props.initialValue || taskItemState;
-      const [emptyFieldError, setEmptyFieldError] = useState('');
 
       return (
         <form className="bg-white p-4 rounded-lg flex flex-col gap-4 text-sm relative">
@@ -111,8 +109,8 @@ const TaskModal = observer(
                 ) {
                   return;
                 } else {
-                  taskState.editTask(task);
                   props.setOpen(false);
+                  taskState.editTask(task);
                 }
               }}
             >
