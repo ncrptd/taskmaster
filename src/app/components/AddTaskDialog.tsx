@@ -1,12 +1,14 @@
+import { Cross1Icon } from '@radix-ui/react-icons';
 import { taskItemState, taskState } from '../model/Task';
 import { observer } from 'mobx-react-lite';
-const AddTaskModal = observer((props: { setOpen: any }) => {
+
+const AddTaskDialog = observer((props: { setOpen: any }) => {
   {
     const task = taskItemState;
 
     return (
       <form
-        className="bg-white p-4 rounded-lg flex flex-col gap-4 text-sm"
+        className="bg-white p-4 rounded-lg flex flex-col gap-4 text-sm relative"
         onSubmit={(e) => {
           e.preventDefault();
           if (
@@ -16,12 +18,20 @@ const AddTaskModal = observer((props: { setOpen: any }) => {
           ) {
             return;
           } else {
-            taskState.addTodo(task);
+            taskState.addTask(task);
             props.setOpen(false);
             task.clearProperties();
           }
         }}
       >
+        <Cross1Icon
+          className="absolute top-5 right-5 cursor-pointer hover:text-red-500"
+          onClick={() => {
+            taskItemState.clearProperties();
+            props.setOpen(false);
+          }}
+        />
+        <h2>Add Task</h2>
         <div className="flex flex-col gap-1">
           <label htmlFor="title">Title: </label>
           <input
@@ -109,4 +119,4 @@ const AddTaskModal = observer((props: { setOpen: any }) => {
   }
 });
 
-export default AddTaskModal;
+export default AddTaskDialog;

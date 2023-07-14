@@ -1,6 +1,6 @@
 import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
 import { Instance } from 'mobx-state-tree';
-import { TaskItem } from '../model/Task';
+import { TaskItem, taskState } from '../model/Task';
 
 function TaskCard({ task }: { task: Instance<typeof TaskItem> }) {
   return (
@@ -33,7 +33,12 @@ function TaskCard({ task }: { task: Instance<typeof TaskItem> }) {
         <button className="p-2 rounded hover:bg-gray-200 ">
           <Pencil1Icon />
         </button>
-        <button className="p-2 rounded hover:bg-gray-200">
+        <button
+          className="p-2 rounded hover:bg-gray-200"
+          onClick={() => {
+            taskState.deleteTask(task);
+          }}
+        >
           <TrashIcon />
         </button>
       </div>

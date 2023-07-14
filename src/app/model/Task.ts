@@ -1,4 +1,4 @@
-import { Instance, onSnapshot, types } from 'mobx-state-tree';
+import { Instance, onSnapshot, types, destroy } from 'mobx-state-tree';
 import { title } from 'process';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -32,12 +32,13 @@ const Tasks = types
     tasks: types.optional(types.array(TaskItem), []),
   })
   .actions((self) => ({
-    addTodo(task: Instance<typeof TaskItem>) {
+    addTask(task: Instance<typeof TaskItem>) {
       self.tasks.push({ ...task, id: uuidv4() });
     },
-    editTodo(task: Instance<typeof TaskItem>) {
-      self.tasks.map((t) => (t.id === task.id ? task : t));
+    deleteTask(task: Instance<typeof TaskItem>) {
+      destroy(task);
     },
+    editTask(task: Instance<typeof TaskItem>) {},
   }));
 
 const taskState = Tasks.create({
@@ -82,7 +83,3 @@ const taskItemState = TaskItem.create({
   id: '',
 });
 export { taskState, taskItemState, TaskItem, Tasks };
-
-onSnapshot(taskState, (snapshot) => {
-  console.log(snapshot);
-});

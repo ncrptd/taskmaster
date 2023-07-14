@@ -5,16 +5,15 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { taskState } from '../model/Task';
 import { observer } from 'mobx-react-lite';
 import TaskCard from './TaskCard';
-import AddTaskModal from './AddTaskModal';
+import AddTaskDialog from './AddTaskDialog';
 import { useState } from 'react';
 
 const TaskList = observer(() => {
   const { tasks } = taskState;
   const [open, setOpen] = useState(false);
-
   return (
     <div className="p-4 ">
-      <h1 className="text-center text-2xl">Tasks</h1>
+      <h1 className="text-center text-2xl text-blue-400 mb-4">TaskMaster</h1>
 
       <div className="p-2 flex flex-col gap-4 ">
         <div>
@@ -29,7 +28,7 @@ const TaskList = observer(() => {
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 bg-black/50 flex justify-center items-center">
                 <Dialog.Content className=" p-4">
-                  <AddTaskModal setOpen={setOpen} />
+                  <AddTaskDialog setOpen={setOpen} />
                 </Dialog.Content>
               </Dialog.Overlay>
             </Dialog.Portal>
