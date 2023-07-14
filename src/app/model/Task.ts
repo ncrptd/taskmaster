@@ -39,7 +39,6 @@ const Tasks = types
     },
     editTask(task: Instance<typeof TaskItem>) {
       const targetTask = self.tasks.find((t) => t.id == task.id);
-      console.log(targetTask);
       if (targetTask) {
         targetTask.addtitle(task.title);
         targetTask.addDescription(task.description);
