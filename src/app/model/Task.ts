@@ -81,10 +81,12 @@ let initialState = {
     },
   ],
 };
-if (localStorage.getItem('tasks')) {
-  const data = JSON.parse(localStorage.getItem('tasks')!);
+if (typeof window !== 'undefined') {
+  if (localStorage.getItem('tasks')) {
+    const data = JSON.parse(localStorage.getItem('tasks')!);
 
-  initialState = data;
+    initialState = data;
+  }
 }
 
 const taskState = Tasks.create(initialState);
