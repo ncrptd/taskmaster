@@ -82,7 +82,6 @@ let initialState = {
   ],
 };
 if (localStorage.getItem('tasks')) {
-  console.log('run');
   const data = JSON.parse(localStorage.getItem('tasks')!);
 
   initialState = data;
