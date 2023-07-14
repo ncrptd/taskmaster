@@ -3,7 +3,7 @@ import TaskList from './components/TaskList';
 
 export default function Home() {
   return (
-    <main>
+    <main className="h-screen">
       <Header />
       <TaskList />
     </main>

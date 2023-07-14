@@ -1,12 +1,6 @@
-import { types } from 'mobx-state-tree';
+import { Instance, onSnapshot, types } from 'mobx-state-tree';
+import { title } from 'process';
 import { v4 as uuidv4 } from 'uuid';
-
-export type Task = {
-  title: string;
-  description: string;
-  status: string;
-  id: string;
-};
 
 const TaskItem = types
   .model({
@@ -25,6 +19,12 @@ const TaskItem = types
     changeStatus(status: string) {
       self.status = status;
     },
+    clearProperties() {
+      (self.title = ''),
+        (self.description = ''),
+        (self.status = ''),
+        (self.id = '');
+    },
   }));
 
 const Tasks = types
@@ -32,19 +32,19 @@ const Tasks = types
     tasks: types.optional(types.array(TaskItem), []),
   })
   .actions((self) => ({
-    addTodo(task: Task) {
+    addTodo(task: Instance<typeof TaskItem>) {
       self.tasks.push({ ...task, id: uuidv4() });
     },
-    editTodo(task: Task) {
+    editTodo(task: Instance<typeof TaskItem>) {
       self.tasks.map((t) => (t.id === task.id ? task : t));
     },
   }));
 
-const taskStore = Tasks.create({
+const taskState = Tasks.create({
   tasks: [
     {
       title: 'Complete math homework',
-      description: 'Finish the calculus and linear algebra assignments',
+      description: 'Finish the calculus and linear algebra assignments ',
       status: 'To Do',
       id: '1',
     },
@@ -75,4 +75,14 @@ const taskStore = Tasks.create({
   ],
 });
 
-export { taskStore };
+const taskItemState = TaskItem.create({
+  title: '',
+  description: '',
+  status: '',
+  id: '',
+});
+export { taskState, taskItemState, TaskItem, Tasks };
+
+onSnapshot(taskState, (snapshot) => {
+  console.log(snapshot);
+});
