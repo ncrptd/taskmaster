@@ -38,7 +38,14 @@ const Tasks = types
     deleteTask(task: Instance<typeof TaskItem>) {
       destroy(task);
     },
-    editTask(task: Instance<typeof TaskItem>) {},
+    editTask(task: Instance<typeof TaskItem>) {
+      const targetTask = self.tasks.find((t) => t.id == task.id);
+      if (targetTask) {
+        targetTask.addtitle(task.title);
+        targetTask.addDescription(task.description);
+        targetTask.changeStatus(task.status);
+      }
+    },
   }));
 
 const taskState = Tasks.create({

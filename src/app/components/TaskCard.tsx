@@ -1,8 +1,12 @@
 import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
 import { Instance } from 'mobx-state-tree';
 import { TaskItem, taskState } from '../model/Task';
+import * as Dialog from '@radix-ui/react-dialog';
+import TaskModal from './TaskModal';
+import { useState } from 'react';
 
 function TaskCard({ task }: { task: Instance<typeof TaskItem> }) {
+  const [open, setOpen] = useState(false);
   return (
     <div
       className={`bg-white p-2 shadow-lg border border-slate-300  overflow-hidden rounded-md cursor-pointer ease-in-out transition-all duration-300 flex justify-between hover:bg-blue-50`}
@@ -30,14 +34,26 @@ function TaskCard({ task }: { task: Instance<typeof TaskItem> }) {
         </h4>
       </div>
       <div>
-        <button className="p-2 rounded hover:bg-gray-200 ">
-          <Pencil1Icon />
-        </button>
+        <Dialog.Root open={open}>
+          <Dialog.Trigger
+            className="p-2 rounded hover:bg-gray-200"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <Pencil1Icon />
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 bg-black/50 flex justify-center items-center">
+              <Dialog.Content className=" p-4">
+                <TaskModal setOpen={setOpen} initialValue={task} />
+              </Dialog.Content>
+            </Dialog.Overlay>
+          </Dialog.Portal>
+        </Dialog.Root>
         <button
           className="p-2 rounded hover:bg-gray-200"
-          onClick={() => {
-            taskState.deleteTask(task);
-          }}
+          onClick={() => taskState.deleteTask(task)}
         >
           <TrashIcon />
         </button>
