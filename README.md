@@ -1,6 +1,6 @@
-# To-Do App
+# TaskMaster
 
-This is a simple to-do application built using Next.js, TypeScript, Tailwind CSS, and MobX State Tree (MST). The application allows users to create, read, update, and delete tasks, and utilizes MST for state management and local storage.
+TaskMaster is a task management platform which is built using Next.js, TypeScript, Tailwind CSS, and MobX State Tree (MST). This application allows users to create, read, update, and delete tasks, and utilizes MST for state management and local storage.
 
 ## Technology Stack
 
